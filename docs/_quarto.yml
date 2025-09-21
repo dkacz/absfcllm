@@ -1,0 +1,17 @@
+project:
+  type: website
+  output-dir: _site
+
+website:
+  title: "ABM Monetary Union Docs"
+  navbar:
+    left:
+      - file: ssrn-3118643.qmd
+        text: "SSRN 3118643"
+
+format:
+  html:
+    theme: cosmo
+    toc: true
+    number-sections: true
+    mathjax: default

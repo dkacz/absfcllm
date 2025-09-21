@@ -1,7 +1,11 @@
 ---
 title: "The Effects of Alternative Wage Regimes in a Monetary Union"
 author: "Alessandro Caiani, Ermanno Catullo, Mauro Gallegati"
-format: gfm
+format:
+  html:
+    toc: true
+    number-sections: true
+    theme: cosmo
 ---
 
 **Source**: [SSRN working paper 3118643](https://ssrn.com/abstract=3118643). Converted automatically from the source PDF (`docs/source/ssrn-3118643.pdf`) using `pdftotext` and `pandoc`; headings and metadata normalized programmatically—review for finer edits.

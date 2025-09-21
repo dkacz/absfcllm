@@ -27,8 +27,8 @@
 
 ## Documentation & Reporting Workflow
 - Quarto will be the standard publishing toolset; track setup work in issue #3 and land changes through the backlog.
-- Place source notebooks and markdown under a forthcoming `docs/` Quarto project and render with `quarto render` before sharing results.
-- Keep generated HTML/PDF artifacts out of git unless publishing via Pages; attach key exports to issues or releases instead.
+- Place source notebooks and markdown under `docs/` (now a Quarto project) and render locally with `quarto render docs` before sharing results.
+- Keep generated HTML/PDF artifacts (e.g., `docs/_site/`) out of git; attach key exports to issues or releases instead.
 
 ## Issue Backlog Workflow
 - Treat the backlog as the single source of truth: open or update an issue before starting any work.
