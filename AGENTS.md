@@ -25,6 +25,11 @@
 - Capture CSV snapshots from `code/data/<scenario-name>/` and compare against baselines when altering financial logic.
 - Share observed KPI deltas in the PR description to provide regression evidence.
 
+## Documentation & Reporting Workflow
+- Quarto will be the standard publishing toolset; track setup work in issue #3 and land changes through the backlog.
+- Place source notebooks and markdown under a forthcoming `docs/` Quarto project and render with `quarto render` before sharing results.
+- Keep generated HTML/PDF artifacts out of git unless publishing via Pages; attach key exports to issues or releases instead.
+
 ## Issue Backlog Workflow
 - Treat the backlog as the single source of truth: open or update an issue before starting any work.
 - Pull active work from the open backlog list and keep each branch/PR tied to exactly one issue.
