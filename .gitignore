@@ -1,0 +1,7 @@
+# Generated simulation outputs
+code/data/
+*.log
+*.csv
+
+# Bytecode artifacts
+*.pyc
