@@ -26,6 +26,8 @@
 - Share observed KPI deltas in the PR description to provide regression evidence.
 
 ## Issue Backlog Workflow
+- Treat the backlog as the single source of truth: open or update an issue before starting any work.
+- Pull active work from the open backlog list and keep each branch/PR tied to exactly one issue.
 - File backlog items using the `Backlog Item` issue template (GitHub issues → New issue).
 - Use the `backlog` label plus area tags (`area:bank`, `area:policy`) to group work.
 - Link issues in branches/PRs (`git checkout -b feature/123-short-title`) and commits (`Refs #123`).
