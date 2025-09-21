@@ -37,6 +37,7 @@
 - Use the `backlog` label plus area tags (`area:bank`, `area:policy`) to group work.
 - Link issues in branches/PRs (`git checkout -b feature/123-short-title`) and commits (`Refs #123`).
 - Update checkboxes in the issue as tasks land and attach KPI snapshots or logs from `code/data/<scenario>/`.
+- Mark issue checkboxes only after outputs are verified locally; leave notes instead of prematurely marking items done.
 - Close the issue only after the Definition of Done checklist is complete.
 
 ## Commit & Pull Request Guidelines
