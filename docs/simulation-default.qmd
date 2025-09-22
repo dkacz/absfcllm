@@ -43,11 +43,46 @@ summary_stats.index = ['mean', 'std', 'min', 'max']
 summary_stats.round(3)
 ```
 
-The mean values are broadly consistent with the paper's baseline experiment (see Table 3 in Caiani et al. 2017):
+```{python}
+ratio_rows = []
+for agg_file in sorted(DATA_ROOT.glob('*AggData.csv')):
+    run = int(agg_file.stem.split('r')[-1].replace('AggData',''))
+    df = pd.read_csv(agg_file)
+    final = df[df['time'] == df['time'].max()]
+    gdp = final['Yprod'].sum()
+    ratio_rows.append({
+        'run': run,
+        'Exports/GDP (%)': final['Export'].sum() / gdp * 100,
+        'Imports/GDP (%)': final['Import'].sum() / gdp * 100,
+        'Public Debt/GDP (%)': final['publicDebt'].sum() / gdp * 100,
+        'Private Loans/GDP (%)': final['bankLoan'].sum() / gdp * 100,
+        'Public Deficit/GDP (%)': final['publicDeficit'].sum() / gdp * 100,
+        'Public Expenditure/GDP (%)': final['G'].sum() / gdp * 100,
+        'R&D Investment/GDP (%)': final['innovationExpenditure'].sum() / gdp * 100,
+        'Household Investment/GDP (%)': final['PrivateSaving'].sum() / gdp * 100,
+    })
+ratio_df = pd.DataFrame(ratio_rows)
+sim_means = ratio_df.drop(columns='run').mean().round(2)
 
-- Union GDP and trade flows remain of the same order of magnitude, with exports and imports closely balanced.
-- The average wage share (~0.79) and Herfindahl index (~0.016) fall within the bands reported in the published results, indicating similar market concentration and income distribution outcomes.
-- Public debt and deficits stabilise around the expected levels given the fiscal rules embedded in `parameter.py`.
+paper_reference = pd.Series({
+    'Exports/GDP (%)': 29.39,
+    'Imports/GDP (%)': 29.44,
+    'Public Debt/GDP (%)': 117.5,
+    'Private Loans/GDP (%)': 127.9,
+    'Public Deficit/GDP (%)': 0.90,
+    'Public Expenditure/GDP (%)': 46.6,
+    'R&D Investment/GDP (%)': 2.80,
+    'Household Investment/GDP (%)': 8.70,
+})
+
+comparison = pd.DataFrame({
+    'Simulation mean (%)': sim_means,
+    'Paper (5-country) (%)': paper_reference
+})
+comparison
+```
+
+The union-level averages show that trade flows and indebtedness are well aligned with the five-country baseline in Caiani et al. (2017): exports and imports hover around 28.8 % of GDP (vs. ≈29 %), public debt is ≈120 % of GDP (vs. 117.5 %), and private credit remains in the same range (≈134 % vs. 127.9 %). The fiscal stance and innovation effort differ more strongly: the default calibration yields a slightly higher deficit (≈1.5 % vs. 0.9 %), lower public expenditure (≈43.8 % vs. 46.6 %), and reduced R&D intensity (≈1.6 % vs. 2.8 %). Household investment is also lower because the current aggregator records net private saving rather than the gross household investment concept used in the paper. These comparisons highlight which levers would need retuning to fully replicate Table 3.
 
 ## Verification Checklist
 
@@ -58,5 +93,4 @@ The mean values are broadly consistent with the paper's baseline experiment (see
 
 ## Alignment with Published Results
 
-While the raw numbers are not identical—owing to random seeds and the absence of explicit calibration against the empirical datasets used in the paper—the simulated trajectories exhibit the same qualitative behaviour described by Caiani et al. (2017): coordinated fiscal-and-wage policies sustain aggregate demand, and the union remains close to external balance. These findings provide a reasonable baseline for further experiments (e.g., alternative wage regimes or policy shocks).
-
+While the raw numbers are not identical—owing to random seeds and the absence of explicit calibration against the empirical datasets used in the paper—the simulated trajectories reproduce the qualitative behaviour described by Caiani et al. (2017): coordinated fiscal-and-wage policies sustain aggregate demand and keep the external account balanced. Quantitatively, trade and debt metrics match closely, whereas fiscal, R&D, and household-investment ratios would benefit from targeted calibration. The default run therefore offers a solid baseline while signalling where additional parameter work is required.
