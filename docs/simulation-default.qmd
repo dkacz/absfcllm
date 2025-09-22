@@ -9,16 +9,22 @@ format:
 
 ## Overview
 
-This note documents the baseline simulation produced by running `timing.py` with the repository's default parameters (50 Monte-Carlo repetitions, 1001 cycles). Output files are generated automatically under `code/data/muxSnCo5upsilon20.7polModPolVar0.512/`.
+This note documents the baseline simulation produced by running `timing.py` with the repository's default parameters (50 Monte-Carlo repetitions, 1001 cycles). Output files are generated automatically under `code/data/baseline5country/`.
 
-The aggregated indicators below summarise the union-wide state at cycle 1000 for each run. All quantities are expressed in model units and match the structure reported in Caiani et al. (2017). Variability stems from different random seeds across repetitions.
+DATA_ROOT = Path('../code/data/baseline5country')
+assert DATA_ROOT.exists(), f"Missing simulation output at {DATA_ROOT}"
 
 ```{python}
 import pandas as pd
 from pathlib import Path
 
-DATA_ROOT = Path('../code/data/muxSnCo5upsilon20.7polModPolVar0.512')
-assert DATA_ROOT.exists(), f"Missing simulation output at {DATA_ROOT}"
+# Baseline parameters follow Table 2 in Caiani et al. (2017):
+# K=5, H=500, l^S=1.0, ψ=10, υ=1.625, υ_H=0.7, υ_F=1.0, φ_0=1,
+# τ_0=0.4, c_y=0.9, c_D=0.1, δ=0.03, c_T=0.4, β=2.0, λ=0.2,
+# θ=0.2, γ=0.03, ν=0.8, ρ=0.95, ζ=0.1, μ_1=20, μ_2=0.1,
+# ι_l=0.5, χ=0.003, ι_b=0.1, r_re=0.0, r_b0=0.001, w_0=1,
+# r̄=0.0075, ξ=0.8, ξ_ΔP=2, ΔP=0.005, d_max=0.03, τ_min=0.35,
+# τ_max=0.45, g_min=0.4, g_max=0.6, η=0.1, $=0.1, A_0=10, σ=4.
 
 rows = []
 for agg_file in sorted(DATA_ROOT.glob('*AggData.csv')):

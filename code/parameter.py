@@ -6,7 +6,7 @@ import math
 
 class Parameter:
       def __init__(self):                         
-          self.name='muxSnCo5upsilon20.7polModPolVar0.512'#1.625'#2.876'#2.231#1.625'#1.053#0.512'
+          self.name='baseline5country'
           module_dir = os.path.dirname(os.path.abspath(__file__))
           data_root = os.path.join(module_dir, 'data')
           self.folder=os.path.join(data_root, self.name)
@@ -25,12 +25,12 @@ class Parameter:
           self.upsilon=1.625#1.0# (upsilon)
           self.upsilon2=0.7#(upsilon2)  
           self.phi=1.0 # (phi_0)
-          self.delta=0.04#0.03 (delta) 
+          self.delta=0.03# (delta) 
           self.dividendRate=0.95#0.95# (rho)   
           self.gamma=0.03#(gamma)
           self.ni=0.8#1.0#(ni) 
           self.deltaInnovation=0.04# (delta) 
-          self.Fcost=1.0# (F)
+          self.Fcost=0.1# (minimum investment threshold)
           self.minMarkUp=0.0#0.0# (minimum mark-up)
           self.theta=0.2
           self.jobDuration=0#self.ncycle#40
@@ -38,17 +38,17 @@ class Parameter:
           self.bound=10# # (psi)  n. matching       
           self.cDisposableIncome=0.9# (c_y)
           self.cWealth=0.1# (c_D)
-          self.liqPref=0.1# (lambda) 
+          self.liqPref=0.2# (lambda) 
           self.beta=2.0#2.0#0.25#2.0#(beta)
           self.ls=1.0 #(l^S) 
           self.wBar=0.1 #(w bar)
           self.w0=1.0 #(w_0)          
           #bank
-          self.probBank=0.1#0.1(eta)
+          self.probBank=0.1#(eta)
           self.sigma=4.0 
           self.minReserve=0.1  #(mu_2)        
           self.xi=0.003#0.003# (chi)     
-          self.rDeposit=0.001# (r_re)  
+          self.rDeposit=0.0# (r_re)  
           self.mu1=20.0#12.0#(mu_1)
           self.iota=0.5#0.5#1.0#(iota_l)
           self.iotaE=0.1#(iota_b) 
@@ -70,7 +70,7 @@ class Parameter:
           self.csiDP=2.0#(xiDP)  
           self.inflationTarget=0.005#(DeltaP) 
           # policy
-          self.policyKind='Mod'#'nn'#'ModAll'#'Mod'
+          self.policyKind='nn'# baseline with no discretionary policy
           self.startingPolicy=500#(policy starting time)
           self.policyVariable=0.512#1.625##2.876#0.512#1.625#2.231#1.053
           self.maxPublicDeficitAusterity=self.policyVariable#(d)
