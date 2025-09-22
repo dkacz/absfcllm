@@ -8,6 +8,8 @@ website:
     left:
       - file: ssrn-3118643.qmd
         text: "SSRN 3118643"
+      - file: simulation-default.qmd
+        text: "Default Simulation"
 
 format:
   html:
