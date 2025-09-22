@@ -133,6 +133,7 @@ class Aggregator:
           Expenditure=0
           quantityConsumed=0 
           Investing=0
+          InvestingPositive=0
           depositAllocated=0
           A=0
           nfirm=0
@@ -180,6 +181,7 @@ class Aggregator:
               quantityConsumedC=0 
               quantityConsumedCTradable=0
               quantityConsumedCNotTradable=0    
+              InvestingPositiveC=0
               InvestingC=0
               DepositingC=0
               MvalueC=0
@@ -214,7 +216,10 @@ class Aggregator:
                   quantityConsumedC=quantityConsumedC+McountryConsumer[country][consumer].quantityConsumed
                   quantityConsumedCTradable=quantityConsumedCTradable+McountryConsumer[country][consumer].quantityConsumedTradable
                   quantityConsumedCNotTradable=quantityConsumedCNotTradable+McountryConsumer[country][consumer].quantityConsumedNotTradable 
-                  InvestingC=InvestingC+McountryConsumer[country][consumer].Investing
+                  investing_value=McountryConsumer[country][consumer].Investing
+                  InvestingC=InvestingC+investing_value
+                  if investing_value>0:
+                     InvestingPositiveC=InvestingPositiveC+investing_value
                   DepositingC=DepositingC+McountryConsumer[country][consumer].Depositing
                   AC=AC+McountryConsumer[country][consumer].A
                   AfirmC=AfirmC+McountryConsumer[country][consumer].Afirm
@@ -242,6 +247,7 @@ class Aggregator:
               Expenditure=Expenditure+ExpenditureC
               quantityConsumed=quantityConsumed+quantityConsumedC
               Investing=Investing+InvestingC
+              InvestingPositive=InvestingPositive+InvestingPositiveC
               A=A+AC
               # firm
               nfirmC=len(McountryFirm[country])
@@ -492,7 +498,7 @@ class Aggregator:
                                    DcountryBankEnter[country],DcountryBankExit[country],AbankC,\
                                    nfirmCTradable,nfirmCNotTradable,AfirmCTradable,\
                                    DglobalPhiTradable[country],DglobalPhiNotTradable[country],\
-                                   avPCTradable,avPCNotTradable,SavingC,nCreditLink,averageFirmProfit,McountryEtat[country].adjust,\
+                                   avPCTradable,avPCNotTradable,SavingC,InvestingC,InvestingPositiveC,nCreditLink,averageFirmProfit,McountryEtat[country].adjust,\
                                    productionCSold+changeInventoryValue,McountryEtat[country].Salvatage,bankLosses,\
                                    McountryEtat[country].taxRate,\
                                    McountryEtat[country].realG,\
@@ -663,7 +669,7 @@ class Aggregator:
              'exitingBank','netWorthBank',\
              'nFirmTradable','nfirmNotTradable',\
              'netWorthFirmTradable','avPhiTradable','avPhiNotTradable',\
-             'avPCTradable','avPCNotTradable','Saving','nCreditLink','averageFirmProfit','adjust','Ysold',\
+             'avPCTradable','avPCNotTradable','Saving','hhInvesting','hhInvestingPos','nCreditLink','averageFirmProfit','adjust','Ysold',\
              'Salvatage','badDebt','taxRate','G',\
              'creditCapitalInflow','creditCapitalOutflow','creditBondInflow','creditBondOutflow','ExpenditureC','disposableIncomeC',\
              'productionSoldValue','changeInventoryValue','inventoryQuantity',\
