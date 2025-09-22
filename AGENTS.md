@@ -4,11 +4,12 @@
 - All simulation source resides in `code/`; modules mirror agent types (`firm.py`, `consumer.py`, `bank.py`, `centralBankUnion.py`, etc.).
 - `timing.py` orchestrates the simulation loop and should be treated as the entry point.
 - `parameter.py` holds scenario parameters; adjust copies rather than editing defaults when possible.
-- Runtime output is written under `code/data/<scenario-name>/` as defined by `Parameter.folder`; the directory is created automatically; confirm it stays untracked with `git status` before committing.
+- Runtime output is written under `code/data/<scenario-name>/` as defined by `Parameter.folder`; the default baseline calibration writes to `code/data/baseline5country/`. Confirm the directory stays untracked with `git status` before committing.
 - Legacy docs live in `code/READMY.txt`; update this guide instead for contributor-facing changes.
 
 ## Build, Test, and Development Commands
 - `cd code && python2 timing.py` runs the default simulation; use the system's Python 2.7 to respect `print` syntax.
+- `cd code && python2 -u timing.py | tee ../timing.log` streams progress and stores a persistent log for long Monte Carlo runs.
 - `cd code && python2 -m compileall .` validates bytecode generation before packaging or distribution.
 - `cd code && python2 printParameters.py` echoes the active configuration for quick sanity checks.
 - When adapting scenarios, duplicate `parameter.py` and import the alternate module via `PYTHONPATH=. python2 -c "import timing"`.
@@ -19,10 +20,10 @@
 - Preserve Python 2 idioms (`print` statements, integer division expectations) unless porting the entire stack.
 - Document non-obvious simulation steps with concise comments placed above the block they clarify.
 
-## Testing Guidelines
 - There is no automated test suite; verify changes by running shortened simulations (set `parameter.ncycle` to a small integer).
 - Add targeted assertions in staging branches (e.g., checking `aggregator` outputs) and remove or guard them before merging.
 - Capture CSV snapshots from `code/data/<scenario-name>/` and compare against baselines when altering financial logic.
+- The baseline dataset used for Table 2 comparisons lives at `code/data/baseline5country/`; each `*AggData.csv` now includes `hhInvesting`, `hhInvestingPos`, and `innovationExpenditure` for easier KPI replication.
 - Share observed KPI deltas in the PR description to provide regression evidence.
 
 ## Documentation & Reporting Workflow
